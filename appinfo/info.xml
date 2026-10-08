@@ -35,7 +35,7 @@
 
     <navigations>
         <name>PDF Tools</name>
-        <route>pdftools.page.index</route>
+        <route>pdf_tools.page.index</route>
     </navigations>
 
     <screenshot></screenshot>

@@ -6,7 +6,7 @@ use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\Settings\IIconSection;
 
-class PdfToolsAdmin implements IIconSection
+class Admin implements IIconSection
 {
     public function __construct(
         private IL10N $l,
