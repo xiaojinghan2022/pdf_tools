@@ -2,9 +2,9 @@
 
 namespace OCA\PdfTools\Controller;
 
+use OCA\PdfTools\Service\StirlingClient;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\JSONResponse;
-use OCP\Http\Client\IClientService;
 use OCP\IConfig;
 use OCP\IRequest;
 
@@ -14,7 +14,7 @@ class SettingsController extends Controller
         string $appName,
         IRequest $request,
         private IConfig $config,
-        private IClientService $clientService,
+        private StirlingClient $stirlingClient,
     ) {
         parent::__construct($appName, $request);
     }
@@ -68,80 +68,10 @@ class SettingsController extends Controller
         ]);
     }
 
-    public function testConnection(
-        string $stirlingUrl = '',
-        string $stirlingApiKey = '',
-    ): JSONResponse {
-        $stirlingUrl = trim($stirlingUrl);
-
-        if ($stirlingUrl === '') {
-            $stirlingUrl = $this->config->getAppValue(
-                'pdf_tools',
-                'stirling_url',
-                ''
-            );
-        }
-
-        if ($stirlingApiKey === '') {
-            $stirlingApiKey = $this->config->getAppValue(
-                'pdf_tools',
-                'stirling_api_key',
-                ''
-            );
-        }
-
-        if ($stirlingUrl === '') {
-            return new JSONResponse([
-                'success' => false,
-                'error' => 'Stirling-PDF URL is not configured.',
-            ], 400);
-        }
-
-        $scheme = strtolower(
-            (string) parse_url($stirlingUrl, PHP_URL_SCHEME)
-        );
-
-        if (!in_array($scheme, ['http', 'https'], true)) {
-            return new JSONResponse([
-                'success' => false,
-                'error' => 'Only HTTP and HTTPS URLs are supported.',
-            ], 400);
-        }
-
+    public function testConnection(): JSONResponse
+    {
         try {
-            $client = $this->clientService->newClient();
-
-            $headers = [];
-
-            if ($stirlingApiKey !== '') {
-                $headers['X-API-KEY'] = $stirlingApiKey;
-            }
-
-            $response = $client->get(
-                rtrim($stirlingUrl, '/') . '/api/v1/info/status',
-                [
-                    'headers' => $headers,
-                    'timeout' => 10,
-                ]
-            );
-
-            $statusCode = $response->getStatusCode();
-            $body = $response->getBody();
-
-            if ($statusCode < 200 || $statusCode >= 300) {
-                return new JSONResponse([
-                    'success' => false,
-                    'error' => 'Stirling-PDF returned HTTP ' . $statusCode . '.',
-                ], 502);
-            }
-
-            $data = json_decode($body, true);
-
-            if (
-                is_array($data)
-                && isset($data['status'])
-                && strtoupper((string) $data['status']) === 'UP'
-            ) {
+            if ($this->stirlingClient->testConnection()) {
                 return new JSONResponse([
                     'success' => true,
                     'status' => 'UP',
@@ -150,8 +80,7 @@ class SettingsController extends Controller
 
             return new JSONResponse([
                 'success' => false,
-                'error' => 'Stirling-PDF responded, but its status was not UP.',
-                'response' => $data,
+                'error' => 'Stirling-PDF did not report status UP.',
             ], 502);
 
         } catch (\Throwable $e) {

@@ -34,11 +34,7 @@ form?.addEventListener('submit', async (event) => {
             OC.generateUrl('/apps/pdf_tools/settings'),
             {
                 method: 'POST',
-                headers: getHeaders(),
-                body: JSON.stringify({
-                    stirlingUrl: urlInput.value,
-                    stirlingApiKey: apiKeyInput.value,
-                }),
+                headers: {'requesttoken': OC.requestToken,},
             }
         );
 
@@ -46,11 +42,11 @@ form?.addEventListener('submit', async (event) => {
 
         if (!response.ok || !data.success) {
             throw new Error(
-                data.error || 'Failed to save settings.'
+                data.error || 'Connection failed.'
             );
         }
 
-        setStatus('Settings saved.', true);
+        setStatus('Connected to Stirlng-PDF successfully.', true);
     } catch (error) {
         setStatus(error.message);
     } finally {
