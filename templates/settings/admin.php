@@ -50,6 +50,13 @@
                 Save
             </button>
 
+            <button
+                type="button"
+                id="pdf-tools-test"
+            >
+                Test connection
+            </button>
+
             <span id="pdf-tools-status"></span>
         </p>
 

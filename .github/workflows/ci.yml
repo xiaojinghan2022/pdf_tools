@@ -1,8 +1,6 @@
 name: Test Nextcloud App
 on:
     push:
-        branches:
-            - main
         paths:
             - 'lib/**'
             - 'templates/**'

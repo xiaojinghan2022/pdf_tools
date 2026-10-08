@@ -36,6 +36,7 @@
     <navigations>
         <name>PDF Tools</name>
         <route>pdf_tools.page.index</route>
+        <order>100</order>
     </navigations>
 
     <screenshot></screenshot>
