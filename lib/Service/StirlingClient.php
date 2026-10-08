@@ -49,29 +49,36 @@ class StirlingClient
 
     private function getClient()
     {
-        $options = [
-            'timeout' => 120,
-        ];
+        return $this->clientService->newClient();
+    }
+
+    private function getHeaders(): array
+    {
+        $headers = [];
 
         $apiKey = $this->getApiKey();
 
         if ($apiKey !== '') {
-            $options['headers'] = [
-                'X-API-KEY' => $apiKey,
-            ];
+            $headers['X-API-KEY'] = $apiKey;
         }
 
-        return $this->clientService->newClient($options);
+        return $headers;
     }
 
     public function testConnection(): bool
     {
         $response = $this->getClient()->get(
-            $this->getBaseUrl() . '/api/v1/info/status'
+            $this->getBaseUrl() . '/api/v1/info/status',
+            [
+                'timeout' => 120,
+                'headers' => $this->getHeaders(),
+            ]
         );
 
-        if ($response->getStatusCode() < 200
-            || $response->getStatusCode() >= 300) {
+        if (
+            $response->getStatusCode() < 200
+            || $response->getStatusCode() >= 300
+        ) {
             return false;
         }
 
@@ -106,6 +113,10 @@ class StirlingClient
         $response = $this->getClient()->post(
             $this->getBaseUrl() . '/api/v1/misc/compress-pdf',
             [
+                'timeout' => 120,
+
+                'headers' => $this->getHeaders(),
+
                 'multipart' => [
                     [
                         'name' => 'fileInput',
