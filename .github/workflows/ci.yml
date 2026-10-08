@@ -15,7 +15,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - name: checkout repository 
+      - name: checkout repository
         uses: actions/checkout@v7
 
       - name: Setup PHP
@@ -34,7 +34,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - name: checkout repository 
+      - name: checkout repository
         uses: actions/checkout@v7
 
       - name: Install xmllint
@@ -44,11 +44,14 @@ jobs:
 
       - name: XML syntax check
         run: |
-          find appinfo lib templates -name "*.xml" -print0 | xargs -0 -n1 xmllint --noout
+          find appinfo lib templates -name "*.xml" -print0 | \
+            xargs -0 -n1 xmllint --noout
 
       - name: Download Nextcloud app schema
         run: |
-          curl --fail --silent --show-error --location https://apps.nextcloud.com/schema/apps/info.xsd --output info.xsd
+          curl --fail --silent --show-error \
+            --location https://apps.nextcloud.com/schema/apps/info.xsd \
+            --output info.xsd
 
       - name: Validate appinfo.xml
         run: |
@@ -60,7 +63,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - name: checkout repository 
+      - name: checkout repository
         uses: actions/checkout@v7
 
       - name: Setup Python
