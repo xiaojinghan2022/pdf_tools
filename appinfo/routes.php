@@ -2,15 +2,7 @@
 
 return [
     'routes' => [
-        [
-            'name' => 'page#index',
-            'url' => '/',
-            'verb' => 'GET',
-        ],
-        [
-            'name' => 'settings#save',
-            'url' => '/',
-            'verb' => 'POST',
-        ],
+        ['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
+        ['name' => 'settings#save', 'url' => '/', 'verb' => 'POST'],
     ],
 ];

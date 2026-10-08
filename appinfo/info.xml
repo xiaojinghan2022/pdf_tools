@@ -15,9 +15,11 @@
     <namespace>PdfTools</namespace>
 
     <category>files</category>
+    <category>tools</category>
 
     <settings>
         <admin>OCA\PdfTools\Settings\Admin</admin>
+        <admin-section>OCA\PdfTools\Sections\Admin</admin-section>
     </settings>
 
     <js>
@@ -26,6 +28,7 @@
 
     <website>https://github.com/xiaojinghan2022/pdf_tools/</website>
     <bugs>https://github.com/xiaojinghan2022/pdf_tools/issues</bugs>
+    <repository>https://github.com/xiaojinghan2022/pdf_tools.git</repository>
     <dependencies>
         <nextcloud min-version="35" max-version="35"/>
     </dependencies>
