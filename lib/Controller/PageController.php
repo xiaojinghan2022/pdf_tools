@@ -14,7 +14,9 @@ class PageController extends Controller
     ) {
         parent::__construct($appName, $request);
     }
-
+    /**
+     * @NoCSRFRequired
+     */
     public function index(): TemplateResponse
     {
         return new TemplateResponse(

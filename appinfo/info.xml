@@ -16,6 +16,14 @@
 
     <category>files</category>
 
+    <settings>
+        <admin>OCA\PdfTools\Settings\Admin</admin>
+    </settings>
+
+    <js>
+        <script>settings</script>
+    </js>
+
     <website>https://github.com/xiaojinghan2022/pdf_tools/</website>
     <bugs>https://github.com/xiaojinghan2022/pdf_tools/issues</bugs>
     <dependencies>

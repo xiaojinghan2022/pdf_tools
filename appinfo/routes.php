@@ -7,5 +7,10 @@ return [
             'url' => '/',
             'verb' => 'GET',
         ],
+        [
+            'name' => 'settings#save',
+            'url' => '/',
+            'verb' => 'POST',
+        ],
     ],
 ];
