@@ -22,10 +22,6 @@
         <admin-section>OCA\PdfTools\Sections\Admin</admin-section>
     </settings>
 
-    <js>
-        <script>settings</script>
-    </js>
-
     <website>https://github.com/xiaojinghan2022/pdf_tools/</website>
     <bugs>https://github.com/xiaojinghan2022/pdf_tools/issues</bugs>
     <repository>https://github.com/xiaojinghan2022/pdf_tools.git</repository>

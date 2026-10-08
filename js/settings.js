@@ -1,7 +1,7 @@
 const form = document.querySelector('#pdf-tools-settings-form');
 const saveButton = document.querySelector('#pdf-tools-save');
 const testButton = document.querySelector('#pdf-tools-test');
-const status = document.querySelector('#pdf-tools-status');
+const statusElement = document.querySelector('#pdf-tools-status');
 
 const urlInput = document.querySelector(
     '#pdf-tools-stirling-url'
@@ -12,8 +12,8 @@ const apiKeyInput = document.querySelector(
 );
 
 function setStatus(message, success = false) {
-    status.textContent = message;
-    status.style.color = success ? 'green' : 'red';
+    statusElement.textContent = message;
+    statusElement.style.color = success ? 'green' : 'red';
 }
 
 function getHeaders() {
