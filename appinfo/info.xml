@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+
+    <id>pdf_tools</id>
+    <name>PDF Tools</name>
+    <summary>PDF tools powered by Stirling-PDF</summary>
+    <description>Integrates Stirling-PDF with Nextcloud.</description>
+
+    <version>0.1.0</version>
+
+    <licence>agpl</licence>
+    <author mail="my@example.com">Your Name</author>
+
+    <namespace>PdfTools</namespace>
+
+    <category>files</category>
+
+    <dependencies>
+        <nextcloud min-version="35" max-version="35"/>
+    </dependencies>
+
+    <navigations>
+    </navigations>
+
+    <screenshot></screenshot>
+</info>
