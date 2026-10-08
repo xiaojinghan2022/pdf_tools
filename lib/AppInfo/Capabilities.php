@@ -24,7 +24,7 @@ class Capabilities implements ICapability
                     'context-menu' => [
                         [
                             'name' => $this->l10n->t('Compress PDF'),
-                            'url' => '/ocs/v2.php/apps/pdf_tools/pdf/compress/{fileId}',
+                            'url' => '/ocs/v2.php/apps/pdf_tools/api/v1/pdf/compress/{fileId}',
                             'method' => 'POST',
                             'mimetype_filters' => 'application/pdf',
                             'icon' => $this->urlGenerator->imagePath(
