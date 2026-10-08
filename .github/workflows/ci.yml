@@ -1,74 +1,75 @@
+---
 name: Test Nextcloud App
-on:
-    push:
-        paths:
-            - 'appinfo/**'
-            - 'lib/**'
-            - 'templates/**'
-            - '.github/workflows/**'
-    workflow_dispatch:
+'on':
+  push:
+    paths:
+      - 'appinfo/**'
+      - 'lib/**'
+      - 'templates/**'
+      - '.github/workflows/**'
+  workflow_dispatch:
 jobs:
-    php:
-        name: PHP
-        runs-on: ubuntu-latest
-        permissions:
-            contents: read
-        steps:
-            - name: checkout repository 
-              uses: actions/checkout@v7
-              
-            - name: Setup PHP
-              uses: shivammathur/setup-php@v2
-              with:
-                php-version: '8.5'
-                coverage: none
+  php:
+    name: PHP
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: checkout repository 
+        uses: actions/checkout@v7
 
-            - name: PHP syntax check
-              run: |
-                    find . -name "*.php" -print0 | xargs -0 -n1 php -l
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          coverage: none
 
-    xml:
-        name: XML
-        runs-on: ubuntu-latest
-        permissions:
-            contents: read
-        steps:
-            - name: checkout repository 
-              uses: actions/checkout@v7
-              
-            - name: Install xmllint
-              run: |
-                sudo apt update
-                sudo apt install -y libxml2-utils
-            
-            - name: XML syntax check
-              run: |
-                find appinfo lib templates -name "*.xml" -print0 | xargs -0 -n1 xmllint --noout
-            
-            - name: Download Nextcloud app schema
-              run: |
-                curl --fail --silent --show-error --location https://apps.nextcloud.com/schema/apps/info.xsd --output info.xsd
+      - name: PHP syntax check
+        run: |
+          find . -name "*.php" -print0 | xargs -0 -n1 php -l
 
-            - name: Validate appinfo.xml
-              run: |
-                xmllint --noout --schema info.xsd appinfo/info.xml
-    
-    yaml:
-        name: YAML
-        runs-on: ubuntu-latest
-        permissions:
-            contents: read
-        steps:
-            - name: checkout repository 
-              uses: actions/checkout@v7
-              
-            - name: Setup Python
-              uses: actions/setup-python@v7
-              with:
-                python-version: '3.x'
-            
-            - name: Install yamllint
-              run: pip install yamllint
+  xml:
+    name: XML
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: checkout repository 
+        uses: actions/checkout@v7
 
-            - name: YAML syntax check
-              run: yamllint .
+      - name: Install xmllint
+        run: |
+          sudo apt update
+          sudo apt install -y libxml2-utils
+
+      - name: XML syntax check
+        run: |
+          find appinfo lib templates -name "*.xml" -print0 | xargs -0 -n1 xmllint --noout
+
+      - name: Download Nextcloud app schema
+        run: |
+          curl --fail --silent --show-error --location https://apps.nextcloud.com/schema/apps/info.xsd --output info.xsd
+
+      - name: Validate appinfo.xml
+        run: |
+          xmllint --noout --schema info.xsd appinfo/info.xml
+
+  yaml:
+    name: YAML
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: checkout repository 
+        uses: actions/checkout@v7
+
+      - name: Setup Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.x'
+
+      - name: Install yamllint
+        run: pip install yamllint
+
+      - name: YAML syntax check
+        run: yamllint .
