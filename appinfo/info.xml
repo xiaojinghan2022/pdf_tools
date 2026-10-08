@@ -23,6 +23,8 @@
     </dependencies>
 
     <navigations>
+        <name>PDF Tools</name>
+        <route>pdftools.page.index</route>
     </navigations>
 
     <screenshot></screenshot>
