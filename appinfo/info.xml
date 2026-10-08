@@ -28,9 +28,13 @@
         <admin-section>OCA\PdfTools\Sections\Admin</admin-section>
     </settings>
     <navigations>
-        <name>PDF Tools</name>
-        <route>pdf_tools.page.index</route>
-        <order>100</order>
+        <navigation>
+            <id>pdf_tools</id>
+            <name>PDF Tools</name>
+            <route>pdf_tools.page.index</route>
+            <icon>img/client_integration/compress.svg</icon>
+            <order>100</order>
+        </navigation>
     </navigations>
 
     <screenshot></screenshot>
