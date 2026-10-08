@@ -1,2 +1,2 @@
 # my StirlingPDF
-#### An ExApp to context Nextcloud and StirlingPDF
+#### An App to context Nextcloud and StirlingPDF
