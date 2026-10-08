@@ -10,12 +10,14 @@
     <version>0.1.0</version>
 
     <licence>agpl</licence>
-    <author mail="my@example.com">Your Name</author>
+    <author mail="my@example.com">Author</author>
 
     <namespace>PdfTools</namespace>
 
     <category>files</category>
 
+    <website>https://github.com/xiaojinghan2022/pdf_tools/</website>
+    <bugs>https://github.com/xiaojinghan2022/pdf_tools/issues</bugs>
     <dependencies>
         <nextcloud min-version="35" max-version="35"/>
     </dependencies>
