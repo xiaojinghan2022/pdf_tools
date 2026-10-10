@@ -23,8 +23,8 @@ jobs:
       app_version: ${{ steps.software_version.outputs.app_version }}
       php_min: ${{ steps.software_version.outputs.php_min }}
       php_max: ${{ steps.software_version.outputs.php_max }}
-      nextcloud_min: ${{ steps.software_version.outputs.nextcloud_min }}
-      nextcloud_max: ${{ steps.software_version.outputs.nextcloud_max }}
+      nc_min: ${{ steps.software_version.outputs.nc_min }}
+      nc_max: ${{ steps.software_version.outputs.nc_max }}
     steps:
       - name: checkout repository
         uses: actions/checkout@v7
@@ -41,8 +41,8 @@ jobs:
             echo "app_version=$(x '//info/version')"
             echo "php_min=$(x '//info/dependencies/php/@min-version')"
             echo "php_max=$(x '//info/dependencies/php/@max-version')"
-            echo "nextcloud_min=$(x '//info/dependencies/nextcloud/@min-version')"
-            echo "nextcloud_max=$(x '//info/dependencies/nextcloud/@max-version')"
+            echo "nc_min=$(x '//info/dependencies/nc/@min-version')"
+            echo "nc_max=$(x '//info/dependencies/nc/@max-version')"
           } >> "$GITHUB_OUTPUT"
 
   php:
