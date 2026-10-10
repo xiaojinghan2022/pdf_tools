@@ -1,4 +1,6 @@
 import js from "@eslint/js";
+import globals from "globals";
+
 export default [
   js.configs.recommended,
   {
@@ -6,6 +8,12 @@ export default [
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module',
+      globals: {
+        ...globals.browser,
+        OC: "readonly",
+        OCA: "readonly",
+        OCP: "readonly",
+      },
     },
     rules: {},
   },

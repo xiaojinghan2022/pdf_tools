@@ -19,12 +19,12 @@ jobs:
     permissions:
       contents: read
     outputs:
-      app_id:       ${{ steps.software_version.outputs.app_id }}
-      app_version:  ${{ steps.software_version.outputs.app_version }}
-      php_min:      ${{ steps.software_version.outputs.php_min }}
-      php_max:      ${{ steps.software_version.outputs.php_max }}
-      nextcloud_min:       ${{ steps.software_version.outputs.nextcloud_min }}
-      nextcloud_max:       ${{ steps.software_version.outputs.nextcloud_max }}
+      app_id: ${{ steps.software_version.outputs.app_id }}
+      app_version: ${{ steps.software_version.outputs.app_version }}
+      php_min: ${{ steps.software_version.outputs.php_min }}
+      php_max: ${{ steps.software_version.outputs.php_max }}
+      nextcloud_min: ${{ steps.software_version.outputs.nextcloud_min }}
+      nextcloud_max: ${{ steps.software_version.outputs.nextcloud_max }}
     steps:
       - name: checkout repository
         uses: actions/checkout@v7
