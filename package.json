@@ -1,0 +1,36 @@
+{
+  "name": "pdf_tools",
+  "version": "0.1.0",
+  "description": "Integrates Stirling-PDF with Nextcloud.",
+  "keywords": [
+    "nextcloud",
+    "pdf",
+    "tool"
+  ],
+  "homepage": "https://github.com/xiaojinghan2022/pdf_tools#readme",
+  "bugs": {
+    "url": "https://github.com/xiaojinghan2022/pdf_tools/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiaojinghan2022/pdf_tools.git"
+  },
+  "license": "ISC",
+  "author": "xiaojinghan2022",
+  "type": "commonjs",
+  "main": "./src/tool.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "scripts": {
+    "lint": "eslint src"
+  },
+  "dependencies": {
+    "@nextcloud/files": "^4.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.12.0"
+  }
+}

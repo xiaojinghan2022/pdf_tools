@@ -10,7 +10,7 @@
     <version>0.1.0</version>
 
     <licence>agpl</licence>
-    <author mail="my@example.com">Author</author>
+    <author mail="none@example.com">xiaojinghan2022</author>
 
     <namespace>PdfTools</namespace>
 
@@ -21,18 +21,19 @@
     <bugs>https://github.com/xiaojinghan2022/pdf_tools/issues</bugs>
     <repository>https://github.com/xiaojinghan2022/pdf_tools.git</repository>
     <dependencies>
+        <php min-version="8.3"/>
         <nextcloud min-version="35" max-version="35"/>
     </dependencies>
     <settings>
         <admin>OCA\PdfTools\Settings\Admin</admin>
-        <admin-section>OCA\PdfTools\Sections\Admin</admin-section>
+        <admin-section>OCA\PdfTools\Settings\Section</admin-section>
     </settings>
     <navigations>
         <navigation>
             <id>pdf_tools</id>
             <name>PDF Tools</name>
             <route>pdf_tools.page.index</route>
-            <icon>img/client_integration/compress.svg</icon>
+            <icon>client_integration/compress.svg</icon>
             <order>100</order>
         </navigation>
     </navigations>

@@ -7,13 +7,50 @@ name: Test Nextcloud App
       - 'lib/**'
       - 'templates/**'
       - '.github/workflows/**'
+      - 'src/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'composer.json'
   workflow_dispatch:
 jobs:
+  software_version:
+    name: Get appinfo/info.xml
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      app_id:       ${{ steps.software_version.outputs.app_id }}
+      app_version:  ${{ steps.software_version.outputs.app_version }}
+      php_min:      ${{ steps.software_version.outputs.php_min }}
+      php_max:      ${{ steps.software_version.outputs.php_max }}
+      nextcloud_min:       ${{ steps.software_version.outputs.nextcloud_min }}
+      nextcloud_max:       ${{ steps.software_version.outputs.nextcloud_max }}
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v7
+
+      - name: Install xmllint
+        run: sudo apt update && sudo apt install -y libxml2-utils
+
+      - name: Extract
+        id: software_version
+        run: |
+          x() { xmllint --xpath "string($1)" appinfo/info.xml; }
+          {
+            echo "app_id=$(x '//info/id')"
+            echo "app_version=$(x '//info/version')"
+            echo "php_min=$(x '//info/dependencies/php/@min-version')"
+            echo "php_max=$(x '//info/dependencies/php/@max-version')"
+            echo "nextcloud_min=$(x '//info/dependencies/nextcloud/@min-version')"
+            echo "nextcloud_max=$(x '//info/dependencies/nextcloud/@max-version')"
+          } >> "$GITHUB_OUTPUT"
+
   php:
     name: PHP
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    needs: software_version
     steps:
       - name: checkout repository
         uses: actions/checkout@v7
@@ -21,12 +58,12 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.5'
+          php-version: ${{ needs.software_version.outputs.php_min }}
           coverage: none
 
       - name: PHP syntax check
         run: |
-          find . -name "*.php" -print0 | xargs -0 -n1 php -l
+          find appinfo lib templates -name "*.php" -print0 | xargs -0 -n1 php -l
 
   xml:
     name: XML
@@ -38,9 +75,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Install xmllint
-        run: |
-          sudo apt update
-          sudo apt install -y libxml2-utils
+        run: sudo apt update && sudo apt install -y libxml2-utils
 
       - name: XML syntax check
         run: |
@@ -53,9 +88,8 @@ jobs:
             --location https://apps.nextcloud.com/schema/apps/info.xsd \
             --output info.xsd
 
-      - name: Validate appinfo.xml
-        run: |
-          xmllint --noout --schema info.xsd appinfo/info.xml
+      - name: Validate appinfo/info.xml
+        run: xmllint --noout --schema info.xsd appinfo/info.xml
 
   yaml:
     name: YAML
@@ -76,3 +110,36 @@ jobs:
 
       - name: YAML syntax check
         run: yamllint .
+
+  javascript:
+    name: JavaScript
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24.x'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: ESLint
+        run: npm run lint
+
+  json:
+    name: JSON
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v7
+
+      - name: JSON syntax check(jq)
+        run: find . -name '*.json' -print0 | xargs -0 -n1 jq empty

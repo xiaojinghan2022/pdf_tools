@@ -46,7 +46,7 @@ form?.addEventListener('submit', async (event) => {
             );
         }
 
-        setStatus('Connected to Stirlng-PDF successfully.', true);
+        setStatus('Connected to Stirling-PDF successfully.', true);
     } catch (error) {
         setStatus(error.message);
     } finally {

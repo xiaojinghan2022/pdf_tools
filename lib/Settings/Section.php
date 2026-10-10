@@ -1,12 +1,12 @@
 <?php
 
-namespace OCA\PdfTools\Sections;
+namespace OCA\PdfTools\Settings;
 
 use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\Settings\IIconSection;
 
-class Admin implements IIconSection
+class Section implements IIconSection
 {
     public function __construct(
         private IL10N $l,
