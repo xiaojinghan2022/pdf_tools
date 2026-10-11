@@ -10,7 +10,7 @@ const statusEl = document.getElementById('status-msg')
  * 加载已有配置
  */
 async function load() {
-	const { data } = await axios.get(generateUrl('/apps/pdf_tools/api/admin/settings'))
+	const { data } = await axios.get(generateUrl('/apps/pdf_tools/admin/settings'))
 	urlInput.value = data.stirlingUrl || ''
 	if (data.hasApiKey) {
 		keyInput.placeholder = t('pdf_tools', '(unchanged)')
@@ -25,7 +25,7 @@ document.getElementById('save-btn').addEventListener('click', async () => {
 	}
 
 	try {
-		await axios.post(generateUrl('/apps/pdf_tools/api/admin/settings'), payload)
+		await axios.post(generateUrl('/apps/pdf_tools/admin/settings'), payload)
 		statusEl.textContent = t('pdf_tools', 'Settings saved')
 	} catch (e) {
 		statusEl.textContent = e.response?.data?.message || t('pdf_tools', 'Failed to save settings')
@@ -36,7 +36,7 @@ document.getElementById('save-btn').addEventListener('click', async () => {
 document.getElementById('test-btn').addEventListener('click', async () => {
 	try {
 		const { data } = await axios.post(
-			generateUrl('/apps/pdf_tools/api/admin/settings/test'),
+			generateUrl('/apps/pdf_tools/admin/settings/test'),
 			{ stirlingUrl: urlInput.value },
 		)
 		statusEl.textContent = data.message
@@ -48,7 +48,7 @@ document.getElementById('test-btn').addEventListener('click', async () => {
 document.getElementById('test-api-key-btn').addEventListener('click', async () => {
 	try {
 		const { data } = await axios.post(
-			generateUrl('/apps/pdf_tools/api/admin/settings/test-api-key'),
+			generateUrl('/apps/pdf_tools/admin/settings/test-api-key'),
 			{ stirlingUrl: urlInput.value, stirlingApiKey: keyInput.value },
 		)
 		statusEl.textContent = data.message
