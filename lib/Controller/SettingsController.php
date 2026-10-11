@@ -68,7 +68,7 @@ class SettingsController extends Controller {
         }
         try {
             $client = $this->clientService->newClient();
-            $response = $client->get(rtrim($stirlingUrl, '/') . '/api/v1/info/status', [
+            $response = $client->get(rtrim($stirlingUrl, '/') . '/api/v1/info/health', [
                 'headers' => ['X-API-KEY' => $stirlingApiKey] // [reference:3]
             ]);
             if ($response->getStatusCode() === 200) {
