@@ -5,35 +5,36 @@ namespace OCA\PdfTools\Settings;
 use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\Settings\IIconSection;
+use Override;
 
-class Section implements IIconSection
-{
+class AdminSection implements IIconSection {
+
     public function __construct(
-        private IL10N $l,
         private IURLGenerator $urlGenerator,
-    ) {
-    }
+        private IL10N $l,
+    ) {}
 
+    #[Override]
     public function getID(): string
     {
         return 'pdf_tools';
     }
 
+    #[Override]
     public function getName(): string
     {
         return $this->l->t('PDF Tools');
     }
 
+    #[Override]
     public function getPriority(): int
     {
-        return 50;
+        return 75;
     }
 
-    public function getIcon(): string
+    #[Override]
+    public function getIcon()
     {
-        return $this->urlGenerator->imagePath(
-            'core',
-            'actions/settings-dark.svg'
-        );
+        return $this->urlGenerator->imagePath('pdf_tools', 'app.svg');
     }
 }

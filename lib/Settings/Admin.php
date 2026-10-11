@@ -3,35 +3,28 @@
 namespace OCA\PdfTools\Settings;
 
 use OCP\AppFramework\Http\TemplateResponse;
-use OCP\IConfig;
 use OCP\Settings\ISettings;
 use OCP\Util;
+use Override;
 
-class Admin implements ISettings
-{
-    public function __construct(
-        private IConfig $config,
-    ) {}
+class Admin implements ISettings {
 
+    #[Override]
     public function getForm(): TemplateResponse
     {
-        Util::addScript('pdf_tools', 'settings');
-        return new TemplateResponse(
-            'pdf_tools',
-            'settings/admin',
-            [
-                'stirlingUrl' => $this->config->getAppValue('pdf_tools', 'stirling_url', ''),
-                'stirlingApiKey' => $this->config->getAppValue('pdf_tools', 'stirling_api_key', ''),
-            ]
-        );
+        Util::addScript('pdf_tools', 'admin-settings');
+        return new TemplateResponse('pdf_tools', 'settings/admin-settings', [], 'blank');
     }
+
+    #[Override]
     public function getSection(): string
     {
         return 'pdf_tools';
     }
+
+    #[Override]
     public function getPriority(): int
     {
-        return 5;
+        return 10;
     }
 }
-

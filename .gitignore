@@ -8,7 +8,6 @@
 Thumbs.db
 ehthumbs.db
 .thumbnails/
-.vscode/
 .idea/
 *.iml
 *.sublime-project
@@ -23,3 +22,8 @@ ehthumbs.db
 
 /vendor/nextcloud-server/
 /js/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json

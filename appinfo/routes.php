@@ -3,7 +3,8 @@
 return [
     'routes' => [
         ['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
-        ['name' => 'settings#save', 'url' => '/settings', 'verb' => 'POST'],
-        ['name' => 'settings#testConnection', 'url' => '/settings/test', 'verb' => 'POST'],
+        ['name' => 'settings#get', 'url' => '/admin/settings', 'verb' => 'GET'],
+        ['name' => 'settings#save', 'url' => '/admin/settings', 'verb' => 'POST'],
+        ['name' => 'settings#testConnection', 'url' => '/admin/settings/test', 'verb' => 'POST'],
     ],
 ];

@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace OCA\PdfTools\Controller;
 
 use OCP\AppFramework\Controller;

@@ -26,7 +26,7 @@
     </dependencies>
     <settings>
         <admin>OCA\PdfTools\Settings\Admin</admin>
-        <admin-section>OCA\PdfTools\Settings\Section</admin-section>
+        <admin-section>OCA\PdfTools\Settings\AdminSection</admin-section>
     </settings>
     <navigations>
         <navigation>
