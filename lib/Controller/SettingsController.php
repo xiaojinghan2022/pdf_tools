@@ -7,7 +7,6 @@ use OCP\AppFramework\Http\DataResponse;
 use OCP\Http\Client\IClientService;
 use OCP\IAppConfig;
 use OCP\IRequest;
-use Override;
 
 class SettingsController extends Controller {
 
