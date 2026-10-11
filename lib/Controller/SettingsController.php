@@ -11,7 +11,6 @@ use Override;
 
 class SettingsController extends Controller {
 
-    #[Override]
     public function __construct(
         string $appName,
         IRequest $request,

@@ -15,7 +15,6 @@ class Application extends App implements IBootstrap
 {
     public const APP_ID = 'pdf_tools';
 
-    #[Override]
     public function __construct(array $urlParams = [])
     {
         parent::__construct(self::APP_ID, $urlParams);
