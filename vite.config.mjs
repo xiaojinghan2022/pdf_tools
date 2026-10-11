@@ -10,8 +10,8 @@ export default defineConfig(({ mode }) => ({
 				tools: 'src/tools.js',
 			},
 			output: {
-				entryFileNames: '[name].js',
-				chunkFileNames: '[name]-[hash].js',
+				entryFileNames: '[name].mjs',
+				chunkFileNames: '[name]-[hash].mjs',
 				assetFileNames: '[name].[ext]',
 			},
 			external: ['OC', 'OCP', 'OCA'],
