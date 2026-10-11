@@ -33,7 +33,7 @@ class AdminSection implements IIconSection {
     }
 
     #[Override]
-    public function getIcon()
+    public function getIcon(): string
     {
         return $this->urlGenerator->imagePath('pdf_tools', 'app.svg');
     }

@@ -11,7 +11,7 @@ const statusEl = document.getElementById('status-msg')
  */
 async function load() {
 	const { data } = await axios.get(generateUrl('/apps/pdf_tools/api/admin/settings'))
-	urlInput.value = data.url || ''
+	urlInput.value = data.stirlingUrl || ''
 	if (data.hasApiKey) {
 		keyInput.placeholder = t('pdf_tools', '(unchanged)')
 	}
@@ -19,16 +19,16 @@ async function load() {
 
 // 保存
 document.getElementById('save-btn').addEventListener('click', async () => {
-	const payload = { url: urlInput.value }
+	const payload = { stirlingUrl: urlInput.value }
 	if (keyInput.value) {
-		payload.apiKey = keyInput.value
+		payload.stirlingApiKey = keyInput.value
 	}
 
 	try {
 		await axios.post(generateUrl('/apps/pdf_tools/api/admin/settings'), payload)
-		statusEl.textContent = t('pdf_tools', '设置已保存')
-	} catch {
-		statusEl.textContent = t('pdf_tools', '保存失败')
+		statusEl.textContent = t('pdf_tools', 'Settings saved')
+	} catch (e) {
+		statusEl.textContent = e.response?.data?.message || t('pdf_tools', 'Failed to save settings')
 	}
 })
 
@@ -37,11 +37,23 @@ document.getElementById('test-btn').addEventListener('click', async () => {
 	try {
 		const { data } = await axios.post(
 			generateUrl('/apps/pdf_tools/api/admin/settings/test'),
-			{ url: urlInput.value, apiKey: keyInput.value },
+			{ stirlingUrl: urlInput.value },
 		)
 		statusEl.textContent = data.message
 	} catch (e) {
-		statusEl.textContent = e.response?.data?.message || t('pdf_tools', '连接失败')
+		statusEl.textContent = e.response?.data?.message || t('pdf_tools', 'Connection failed')
+	}
+})
+
+document.getElementById('test-api-key-btn').addEventListener('click', async () => {
+	try {
+		const { data } = await axios.post(
+			generateUrl('/apps/pdf_tools/api/admin/settings/test-api-key'),
+			{ stirlingUrl: urlInput.value, stirlingApiKey: keyInput.value },
+		)
+		statusEl.textContent = data.message
+	} catch (e) {
+		statusEl.textContent = e.response?.data?.message || t('pdf_tools', 'Api Key test failed')
 	}
 })
 
