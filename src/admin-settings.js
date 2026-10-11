@@ -10,7 +10,7 @@ const statusEl = document.getElementById('status-msg')
  * 加载已有配置
  */
 async function load() {
-	const { data } = await axios.get(generateUrl('/apps/pdf_tools/api/settings'))
+	const { data } = await axios.get(generateUrl('/apps/pdf_tools/api/admin/settings'))
 	urlInput.value = data.url || ''
 	if (data.hasApiKey) {
 		keyInput.placeholder = t('pdf_tools', '(unchanged)')
@@ -25,7 +25,7 @@ document.getElementById('save-btn').addEventListener('click', async () => {
 	}
 
 	try {
-		await axios.post(generateUrl('/apps/pdf_tools/api/settings'), payload)
+		await axios.post(generateUrl('/apps/pdf_tools/api/admin/settings'), payload)
 		statusEl.textContent = t('pdf_tools', '设置已保存')
 	} catch {
 		statusEl.textContent = t('pdf_tools', '保存失败')
@@ -36,7 +36,7 @@ document.getElementById('save-btn').addEventListener('click', async () => {
 document.getElementById('test-btn').addEventListener('click', async () => {
 	try {
 		const { data } = await axios.post(
-			generateUrl('/apps/pdf_tools/api/settings/test'),
+			generateUrl('/apps/pdf_tools/api/admin/settings/test'),
 			{ url: urlInput.value, apiKey: keyInput.value },
 		)
 		statusEl.textContent = data.message
