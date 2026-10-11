@@ -24,6 +24,7 @@
     "test": "tests"
   },
   "scripts": {
+    "build": "vite build",
     "lint": "eslint src"
   },
   "dependencies": {
@@ -32,6 +33,7 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "eslint": "^10.12.0",
-    "globals": "^17.13.0"
+    "globals": "^17.13.0",
+    "vite": "^8.3.4"
   }
 }
