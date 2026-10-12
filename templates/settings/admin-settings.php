@@ -14,6 +14,7 @@
         <button id="save-btn">Save</button>
         <button id="test-btn">Test Connection</button>
         <button id="test-api-key-btn">Test Api Key</button>
+        <button id="clean-api-key-btn" hidden>Clean Api Key</button>
     </p>
     <p id="status-msg"></p>
 </div>

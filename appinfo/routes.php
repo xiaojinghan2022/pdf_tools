@@ -7,5 +7,6 @@ return [
         ['name' => 'settings#save', 'url' => '/api/admin/settings', 'verb' => 'POST'],
         ['name' => 'settings#testConnection', 'url' => '/api/admin/settings/test', 'verb' => 'POST'],
         ['name' => 'settings#testApiKey', 'url' => '/api/admin/settings/test-api-key', 'verb' => 'POST'],
+        ['name' => 'settings#deleteApiKey', 'url' => '/api/admin/settings/api-key', 'verb' => 'DELETE'],
     ],
 ];
