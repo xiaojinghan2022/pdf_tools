@@ -39,24 +39,24 @@ class SettingsController extends Controller {
             $this->stirlingClient->testConnection($stirlingUrl);
             return new DataResponse(['status' => 'ok', 'message' => 'Url Connection successful']);
         } catch (\InvalidArgumentException $e) {
-            return new DataResponse(['status' => 'error', 'message' => $e->getMessage()], 500);
+            return new DataResponse(['status' => 'error', 'message' => $e->getMessage()], 400);
         } catch (\RuntimeException $e) {
             return new DataResponse(['status' => 'error', 'message' => $e->getMessage()], 401);
         } catch (\Exception $e) {
-            return new DataResponse(['status' => 'error', 'meaasge' => $e->getMessage()], 500);
+            return new DataResponse(['status' => 'error', 'message' => $e->getMessage()], 500);
         }
     }
 
     public function testApiKey(string $stirlingUrl, ?string $stirlingApiKey = null): DataResponse {
         try {
             $this->stirlingClient->testApiKey($stirlingUrl, $stirlingApiKey);
-            return new DataResponse(['status' => 'ok', 'message' => 'API Key availabled']);
+            return new DataResponse(['status' => 'ok', 'message' => 'API Key available']);
         } catch (\InvalidArgumentException $e) {
             return new DataResponse(['status' => 'error', 'message' => $e->getMessage()], 400);
         } catch (\RuntimeException $e) {
             return new DataResponse(['status' => 'error', 'message' => $e->getMessage()], 401);
         } catch (\Exception $e) {
-            return new DataResponse(['status' => 'error', 'meaasge' => $e->getMessage()], 500);
+            return new DataResponse(['status' => 'error', 'message' => $e->getMessage()], 500);
         }
     }
     public function deleteApiKey(): DataResponse {

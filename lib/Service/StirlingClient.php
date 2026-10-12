@@ -25,7 +25,7 @@ class StirlingClient {
             'throw' => false,
         ]);
         $status = $response->getStatusCode();
-        if ($status === 200) { return; };
+        if ($status === 200) { return; }
 
         $body = json_decode((string) $response->getBody(), true);
         $error = $body['error'] ?? "HTTP $status";
@@ -48,7 +48,7 @@ class StirlingClient {
             'throw' => false,
         ]);
         $status = $response->getStatusCode();
-        if ($status === 200) { return; };
+        if ($status === 200) { return; }
         $body = json_decode((string) $response->getBody(), true);
         $error = $body['error'] ?? "HTTP $status";
         throw new \RuntimeException($error);
