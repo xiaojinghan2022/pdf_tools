@@ -1,5 +1,5 @@
 import axios from '@nextcloud/axios'
-import { confirm } from '@nextcloud/dialogs'
+import { showConfirmation } from '@nextcloud/dialogs'
 import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'
 
@@ -62,7 +62,7 @@ function updateKeyUi() {
  */
 async function load() {
 	try {
-		const { data } = await axios.get(generateUrl('/apps/pdf_tools/api/admin/settings'))
+		const { data } = await axios.get(generateUrl('/apps/pdf_tools/api/v1/admin/settings'))
 		urlInput.value = data.stirlingUrl || ''
 		hasApiKey = data.hasApiKey
 		hasServerProxyAuthUser = data.hasServerProxyAuthUser
@@ -96,7 +96,7 @@ saveBtn.addEventListener('click', async () => {
 		}
 	})
 	try {
-		await axios.post(generateUrl('/apps/pdf_tools/api/admin/settings'), { fields: payload })
+		await axios.post(generateUrl('/apps/pdf_tools/api/v1/admin/settings'), { fields: payload })
 		statusEl.textContent = t('pdf_tools', 'Settings saved')
 		load()
 	} catch (e) {
@@ -118,7 +118,7 @@ testBtn.addEventListener('click', async () => {
 	}
 	try {
 		const { data } = await axios.post(
-			generateUrl('/apps/pdf_tools/api/admin/settings/test'),
+			generateUrl('/apps/pdf_tools/api/v1/admin/settings/test'),
 			{ fields: {
 				stirlingUrl: urlInput.value,
 				serverProxyAuthUser: userInput.value,
@@ -141,7 +141,7 @@ testApiKeyBtn.addEventListener('click', async () => {
 	}
 	try {
 		const { data } = await axios.post(
-			generateUrl('/apps/pdf_tools/api/admin/settings/test-api-key'),
+			generateUrl('/apps/pdf_tools/api/v1/admin/settings/test-api-key'),
 			{ fields: {
 				stirlingUrl: urlInput.value,
 				stirlingApiKey: keyInput.value,
@@ -159,7 +159,7 @@ testApiKeyBtn.addEventListener('click', async () => {
 
 // 清除 API Key
 clearKeyBtn.addEventListener('click', async () => {
-	if (!await confirm({
+	if (!await showConfirmation({
 		name: t('pdf_tools', 'Clear API key'),
 		text: t('pdf_tools', 'Clear the stored API key?'),
 		type: 'warning',
@@ -168,7 +168,7 @@ clearKeyBtn.addEventListener('click', async () => {
 	}
 	try {
 		await axios.delete(
-			generateUrl('/apps/pdf_tools/api/admin/settings/config-value'),
+			generateUrl('/apps/pdf_tools/api/v1/admin/settings/config-value'),
 			{ data: { clearValue: ['stirlingApiKey'] } },
 		)
 		hasApiKey = false
@@ -182,7 +182,7 @@ clearKeyBtn.addEventListener('click', async () => {
 
 // 清除反代认证项
 clearAuthBtn.addEventListener('click', async () => {
-	if (!await confirm({
+	if (!await showConfirmation({
 		name: t('pdf_tools', 'Clear Server proxy Auth'),
 		text: t('pdf_tools', 'Clear all Server proxy Auth settings?'),
 		type: 'warning',
@@ -191,7 +191,7 @@ clearAuthBtn.addEventListener('click', async () => {
 	}
 	try {
 		await axios.delete(
-			generateUrl('/apps/pdf_tools/api/admin/settings/config-value'),
+			generateUrl('/apps/pdf_tools/api/v1/admin/settings/config-value'),
 			{ data: { clearValue: ['serverProxyAuthUser', 'serverProxyAuthPass', 'serverProxyAuthToken', 'serverProxyAuthType'] } },
 		)
 		hasServerProxyAuthUser = false
