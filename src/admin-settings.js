@@ -52,8 +52,10 @@ function updateKeyUi() {
 		tokenInput.placeholder = t('pdf_tools', 'Input your Server Proxy Auth Token')
 	}
 	if (hasServerProxyAuthUser || hasServerProxyAuthPass || hasServerProxyAuthToken) {
+		clearAuthBtn.hidden = false
 		advanceDetails.open = true
 	} else {
+		clearAuthBtn.hidden = true
 		advanceDetails.open = false
 	}
 }

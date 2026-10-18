@@ -34,7 +34,7 @@
             <label for="server-proxy-auth-token">Auth Token</label>
             <input type="password" id="server-proxy-auth-token" placeholder="Input your Server Proxy Auth Token" autocomplete="new-password">
         </p>
-        <button id="clear-server-proxy-auth-btn">Clear Server Proxy Auth Config</button>
+        <button id="clear-server-proxy-auth-btn" hidden>Clear Server Proxy Auth Config</button>
 
     </details>
     <p>
