@@ -15,10 +15,10 @@
     "type": "git",
     "url": "git+https://github.com/xiaojinghan2022/pdf_tools.git"
   },
-  "license": "ISC",
+  "license": "AGPL-3.0-or-later",
   "author": "xiaojinghan2022",
-  "type": "commonjs",
-  "main": "./src/tool.js",
+  "type": "module",
+  "main": "./src/tools.js",
   "directories": {
     "lib": "lib",
     "test": "tests"

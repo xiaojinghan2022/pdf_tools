@@ -10,7 +10,13 @@ registerFileAction({
 		return nodes.length === 1 && nodes[0].mime === 'application/pdf'
 	},
 	async exec({ nodes }) {
-		console.log('[pdf_tools] clicked', nodes[0])
+		if (!await confirm({
+			name: t('pdf_tools', 'You click this button'),
+			text: t('pdf_tools', '[pdf_tools] clicked, in {crtime}', { crtime: nodes[0].crtime }),
+			type: 'warning',
+		})) {
+			return
+		}
 		return true
 	},
 })

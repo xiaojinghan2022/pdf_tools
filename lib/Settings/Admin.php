@@ -2,6 +2,7 @@
 
 namespace OCA\PdfTools\Settings;
 
+use OCA\PdfTools\AppInfo\Application;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\Settings\ISettings;
 use OCP\Util;
@@ -12,14 +13,14 @@ class Admin implements ISettings {
     #[Override]
     public function getForm(): TemplateResponse
     {
-        Util::addScript('pdf_tools', 'admin-settings');
-        return new TemplateResponse('pdf_tools', 'settings/admin-settings', [], 'blank');
+        Util::addScript(Application::APP_ID, 'admin-settings');
+        return new TemplateResponse(Application::APP_ID, 'settings/admin-settings', [], 'blank');
     }
 
     #[Override]
     public function getSection(): string
     {
-        return 'pdf_tools';
+        return Application::APP_ID;
     }
 
     #[Override]
